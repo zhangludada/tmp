@@ -16,10 +16,11 @@ def parse_html(url):
                 f.write(content)
             print(name+'写入完成')
     print(url+'全部完成')
+    return url
 
 def get_all_url():
     urls=['http://www.dygangs.com/ys/index.htm']
-    for i in range(2,528):
+    for i in range(2,13):
         url='http://www.dygangs.com/ys/index_{}.htm'.format(i)
         urls.append(url)
     return urls
@@ -28,7 +29,8 @@ def main():
     MAX_WORKS=10
     urls=get_all_url()
     with concurrent.futures.ThreadPoolExecutor(min(MAX_WORKS,len(urls))) as executor:
-        executor.map(parse_html,urls)
+        res=executor.map(parse_html,urls)
+    print(list(res))
 
 if __name__ == '__main__':
     main()

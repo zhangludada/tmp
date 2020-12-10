@@ -28,7 +28,9 @@ def main():
     MAX_WORKS=10
     urls=get_all_url()
     with concurrent.futures.ThreadPoolExecutor(min(MAX_WORKS,len(urls))) as executor:
-        executor.map(parse_html,urls)
+        res=executor.map(parse_html,urls)
+        #res是map对象，list是实际返回值
+        print(list(res))
 
 if __name__ == '__main__':
     main()

@@ -34,6 +34,7 @@ def main():
             res.append(executor.submit(parse_html,url))
 
     for future in concurrent.futures.as_completed(res):
+        #future是future对象，future.result()是返回值
         print('{} is {}'.format(future,future.result()))
 
 if __name__ == '__main__':

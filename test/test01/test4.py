@@ -1,17 +1,18 @@
-class Solution:
-    def generate(self, numRows):
-        if numRows==1:
-            return [[1]]
-        if numRows<2:
-            return [[[1] for i in range(x+1)] for x in range(numRows)]
-        ls=[[1],[1,1]]+[[] for x in range(numRows-2)]
-        for i in range(2,numRows):
-            tmp=[  ls[i-1][j-1]+ls[i-1][j]  for j in range(1,len(ls[i-1]))]
-            tmp=[1]+tmp+[1]
-            ls[i]+=tmp
-        return ls
-a=Solution()
-b=a.generate(2)
-print(b)
+import asyncio
+import requests
+from pyquery import PyQuery
 
+async def parse_html(url):
+    r=requests.get(url)
+    r.encoding=r.apparent_encoding
+    doc=pq(r.text)
+    imgs=doc.find('img')
+    for img in imgs.items():
+        if img.attr('src') and img.attr('alt'):
+            name=img.attr('alt')+'.jpg'
+            url=img.attr('src')
+            content=requests.get(url).content
+            with open('movies/'+name,mode='wb') as f:
+                f.write(content)
+            print(name+'写入完成')
 
