@@ -1,0 +1,2 @@
+{'Exif Image Orientation': '6', 'Exif Image ExifTag': '38', 'Exif Photo PixelXDimension': '1440', 'Exif Photo PixelYDimension': '1080'}
+
